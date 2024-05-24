@@ -3,7 +3,7 @@ import pypdfium2 as pdfium
 import os
 
 # Assign directory
-directory = "dist"
+sourceDocx = "dist"
 
 # Check Dirs Exist
 if os.path.isdir('result/pdf') != True:
@@ -12,43 +12,22 @@ if os.path.isdir('result/pdf') != True:
 if os.path.isdir('result/jpg') != True:
 	os.mkdir("result/jpg")
 
-exit()
-
-# Iterate over files in directory
-for name in os.listdir(directory):
-	print(name)
-
+# print(os.getcwd())
 # exit()
 
-# convert("input.docx")
-# print(convert("surat.docx", "output.png"))
-# convert("my_docx_folder/")
+# Main Start Function
+def runConverter(docxFile):
 
-def docxToPdf(inputfile, outputfile):
-	try:
-		conv = convert(inputfile, outputfile)
-		if conv == None:
-			print("DONE DOCX TO PDF!")
-		else:
-			print("ERROR DOCX TO PDF")
-	except:
-		print("ERR!")
-	
-
-def pdfToJpg(inputfile, outputfile):
-	
-	pdf = pdfium.PdfDocument(inputfile)
-	page = pdf.get_page(0)
-	pil_image = page.render(scale = 300/72).to_pil()
-	image_name = outputfile
-	pil_image.save(image_name)
-
-def runConverter(docxFile, pdfFile):
+	print("DOCX2PDF: " + docxFile)
 
 	# Get new name from docx file name
 	newName = docxFile.split(".docx")[0]
 
-	docxToPdf(inputfile = docxFile, outputfile = newName + ".pdf")
+	pdfFilePath = os.getcwd() + "/result/"
+
+	docxToPdf(inputfile = docxFile, outputfile = pdfDir newName + ".pdf")
+
+	exit()
 
 	if os.path.isfile(pdfFileName):
 		try:
@@ -61,6 +40,35 @@ def runConverter(docxFile, pdfFile):
 			print("PDF2IMG: ERROR!!!")
 	else:
 		print("ERROR CONVERT!!!")
+
+def docxToPdf(inputfile, outputfile):
+	try:
+		conv = convert(inputfile, outputfile)
+		if conv == None:
+			print("DONE DOCX TO PDF!")
+		else:
+			print("ERROR DOCX TO PDF")
+	except:
+		print("ERR!")
+
+# Iterate over files in directory
+for name in os.listdir(sourceDocx):
+	# print(name)
+	runConverter(docxFile = sourceDocx + "/" + name)
+
+# convert("input.docx")
+# print(convert("surat.docx", "output.png"))
+# convert("my_docx_folder/")
+
+# def pdfToJpg(inputfile, outputfile):
+	
+# 	pdf = pdfium.PdfDocument(inputfile)
+# 	page = pdf.get_page(0)
+# 	pil_image = page.render(scale = 300/72).to_pil()
+# 	image_name = outputfile
+# 	pil_image.save(image_name)
+
+
 
 # Init File Name
 # docxFileName = "surat.docx"
